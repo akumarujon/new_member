@@ -26,7 +26,9 @@ const webhook = async () => {
     switch (url.pathname) {
       case "/webhook":
         try {
-          await bot.api.setWebhook(`https://${url.hostname}/bot`);
+          await bot.api.setWebhook(`https://${url.hostname}/bot`, {
+            allowed_updates: ["chat_member", "message"],
+          });
           return new Response("Done. Set");
         } catch (_) {
           return new Response("Couldn't succeed with installing webhook");
